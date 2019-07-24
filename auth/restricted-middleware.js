@@ -1,14 +1,18 @@
 const jwt = require("jsonwebtoken");
 
+const secrets = require('../config/secrets.js')
+
 
 /////   Auth Middleware provided by TOKENS.
 
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
-  const jwtSecret = process.env.JWT_SECRET || "secret secret, i got a secret";
+
+  //  No need for this if there is a sepearate file defining jwtSecret
+//   const jwtSecret = process.env.JWT_SECRET || "secret secret, i got a secret";
 
   if (token) {
-    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+    jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
       if (err) {
         res.status(401).json({ message: "you shall not pass" });
       } else {

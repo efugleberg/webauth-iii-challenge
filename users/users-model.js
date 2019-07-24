@@ -7,6 +7,9 @@ module.exports = {
   findById
 };
 
+
+//  This find function filters the get request by department.  You could
+//  switch the department to any other property and filter.
 function find(department) {
   const query = db("users").select("id", "username", "department");
 
